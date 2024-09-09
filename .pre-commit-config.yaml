@@ -17,7 +17,7 @@ repos:
       rev: 0.2.3
       hooks:
           - id: yamlfmt
-            exclude: (?i)(.*docker-compose.*)$ # by-pass docker-compose since the %YAML 1.2 will break it.
+            exclude: (?i)(.*docker-compose.*|environment.*|requirement.*)$ # by-pass docker-compose since the %YAML 1.2 will break it.
 
     - repo: https://github.com/AleksaC/hadolint-py # hadolint is a Dockerfile linter.
       rev: v2.12.1b3
