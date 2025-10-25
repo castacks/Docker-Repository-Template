@@ -1,5 +1,11 @@
 # Do not add --platform=linux/blabla since this is intended for multiplatform builds
+ARG BASE_IMAGE=ubuntu
 FROM ${BASE_IMAGE}
+
+ARG IMAGE_USER
+ARG HOME_FOLDER
+ARG TIME_ZONE
+
 ENV HOME=${HOME_FOLDER}
 WORKDIR ${HOME_FOLDER}/
 
@@ -66,9 +72,9 @@ RUN wget https://apt-get.kitware.com/kitware-archive.sh -O- | sh -s && \
     apt-get autoremove -y
 
 # # Add a new group and user
-# RUN addgroup --gid 1000 $IMAGE_USER && \
-#     adduser --uid 1000 --ingroup $IMAGE_USER --home ${HOME_FOLDER} --shell /bin/zsh --disabled-password --gecos "" $IMAGE_USER && \
-#     echo "$IMAGE_USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+# RUN addgroup --gid 1000 ${IMAGE_USER} && \
+#     adduser --uid 1000 --ingroup ${IMAGE_USER} --home ${HOME_FOLDER} --shell /bin/zsh --disabled-password --gecos "" ${IMAGE_USER} && \
+#     echo "${IMAGE_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # # Fix UID/GID when mounting from host using this: https://github.com/boxboat/fixuid
 # RUN curl -SsL https://github.com/boxboat/fixuid/releases/download/v0.6.0/fixuid-0.6.0-linux-amd64.tar.gz | tar -C /usr/local/bin -xzf - && \
